@@ -21,41 +21,94 @@ export const useAuth = () => {
   return context;
 };
 
+// Helper function to get token from localStorage
+const getToken = (): string | null => {
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('token');
+  }
+  return null;
+};
+
+// Helper function to set token in localStorage
+const setToken = (token: string): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('token', token);
+  }
+};
+
+// Helper function to remove token from localStorage
+const removeToken = (): void => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('token');
+  }
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Function to fetch user data from API
+  const fetchUser = async (token: string): Promise<AuthUser | null> => {
+    try {
+      const response = await fetch('/api/user', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        return userData;
+      }
+      return null;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     // Check for existing session on mount
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-    setIsLoading(false);
+    const initializeAuth = async () => {
+      const token = getToken();
+      if (token) {
+        const userData = await fetchUser(token);
+        if (userData) {
+          setUser(userData);
+        } else {
+          // Token is invalid, remove it
+          removeToken();
+        }
+      }
+      setIsLoading(false);
+    };
+
+    initializeAuth();
   }, []);
 
   const login = async (credentials: LoginCredentials): Promise<boolean> => {
     try {
-      // In a real app, this would make an API call
-      // For demo purposes, we'll simulate with localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const foundUser = users.find((u: any) => 
-        u.email === credentials.email && u.password === credentials.password
-      );
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
 
-      if (foundUser) {
-        const authUser: AuthUser = {
-          id: foundUser.id,
-          email: foundUser.email,
-          firstName: foundUser.firstName,
-          lastName: foundUser.lastName,
-          accountType: foundUser.accountType,
-        };
-        setUser(authUser);
-        localStorage.setItem('user', JSON.stringify(authUser));
+      if (response.ok) {
+        const data = await response.json();
+        const { token, user: userData } = data;
+        
+        // Store token and user data
+        setToken(token);
+        setUser(userData);
         return true;
+      } else {
+        const errorData = await response.json();
+        console.error('Login failed:', errorData.error);
+        return false;
       }
-      return false;
     } catch (error) {
       console.error('Login error:', error);
       return false;
@@ -64,41 +117,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const register = async (credentials: RegisterCredentials): Promise<boolean> => {
     try {
-      // In a real app, this would make an API call
-      // For demo purposes, we'll simulate with localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      
-      // Check if user already exists
-      if (users.find((u: any) => u.email === credentials.email)) {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(credentials),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const { token, user: userData } = data;
+        
+        // Store token and user data
+        setToken(token);
+        setUser(userData);
+        return true;
+      } else {
+        const errorData = await response.json();
+        console.error('Registration failed:', errorData.error);
         return false;
       }
-
-      const newUser = {
-        id: Date.now().toString(),
-        ...credentials,
-        bio: '',
-        profilePicture: '',
-        education: [],
-        workExperience: [],
-        skills: [],
-        connections: [],
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-
-      const authUser: AuthUser = {
-        id: newUser.id,
-        email: newUser.email,
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        accountType: newUser.accountType,
-      };
-      setUser(authUser);
-      localStorage.setItem('user', JSON.stringify(authUser));
-      return true;
     } catch (error) {
       console.error('Registration error:', error);
       return false;
@@ -107,7 +146,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
+    removeToken();
   };
 
   return (
