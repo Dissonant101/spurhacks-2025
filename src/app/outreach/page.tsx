@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import Navigation from '@/components/Navigation';
 import { SearchFilters } from '@/types';
@@ -282,7 +283,9 @@ export default function Outreach() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between">
                               <div>
-                                <h4 className="text-lg font-medium text-white">{result.name}</h4>
+                                <Link href={`/user/${result.id}`}>
+                                  <h4 className="text-lg font-medium text-white hover:text-blue-400 cursor-pointer transition-colors">{result.name}</h4>
+                                </Link>
                                 <p className="text-blue-400">{result.position}</p>
                                 <p className="text-gray-300 flex items-center">
                                   <Building className="w-4 h-4 mr-1" />

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import Navigation from '@/components/Navigation';
 import { TrendingUp, Users, MessageSquare, Calendar, Briefcase, GraduationCap } from 'lucide-react';
@@ -34,6 +35,7 @@ export default function Dashboard() {
       id: 1,
       type: 'connection',
       user: 'Sarah Johnson',
+      userId: 'user-1',
       action: 'connected with you',
       time: '2 hours ago',
       avatar: 'SJ'
@@ -42,6 +44,7 @@ export default function Dashboard() {
       id: 2,
       type: 'update',
       user: 'Michael Chen',
+      userId: 'user-2',
       action: 'updated their profile',
       time: '4 hours ago',
       avatar: 'MC'
@@ -50,6 +53,7 @@ export default function Dashboard() {
       id: 3,
       type: 'job',
       user: 'Alex Rivera',
+      userId: 'user-3',
       action: 'started a new position at Tech Corp',
       time: '1 day ago',
       avatar: 'AR'
@@ -58,6 +62,7 @@ export default function Dashboard() {
       id: 4,
       type: 'education',
       user: 'Emily Davis',
+      userId: 'user-4',
       action: 'completed a certification in Data Science',
       time: '2 days ago',
       avatar: 'ED'
@@ -65,9 +70,9 @@ export default function Dashboard() {
   ];
 
   const suggestions = [
-    { name: 'Jennifer Wilson', company: 'StartupXYZ', mutualConnections: 5, avatar: 'JW' },
-    { name: 'David Park', company: 'Tech Solutions', mutualConnections: 3, avatar: 'DP' },
-    { name: 'Lisa Chen', company: 'Innovation Labs', mutualConnections: 7, avatar: 'LC' }
+    { name: 'Jennifer Wilson', userId: 'user-5', company: 'StartupXYZ', mutualConnections: 5, avatar: 'JW' },
+    { name: 'David Park', userId: 'user-6', company: 'Tech Solutions', mutualConnections: 3, avatar: 'DP' },
+    { name: 'Lisa Chen', userId: 'user-7', company: 'Innovation Labs', mutualConnections: 7, avatar: 'LC' }
   ];
 
   return (
@@ -135,7 +140,10 @@ export default function Dashboard() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm text-white">
-                          <span className="font-medium">{item.user}</span> {item.action}
+                          <Link href={`/user/${item.userId}`}>
+                            <span className="font-medium hover:text-blue-400 cursor-pointer transition-colors">{item.user}</span>
+                          </Link>
+                          {' '}{item.action}
                         </p>
                         <p className="text-xs text-gray-400">{item.time}</p>
                       </div>
@@ -187,7 +195,9 @@ export default function Dashboard() {
                       {person.avatar}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-white">{person.name}</p>
+                      <Link href={`/user/${person.userId}`}>
+                        <p className="text-sm font-medium text-white hover:text-blue-400 cursor-pointer transition-colors">{person.name}</p>
+                      </Link>
                       <p className="text-xs text-gray-400">{person.company}</p>
                       <p className="text-xs text-gray-400">{person.mutualConnections} mutual connections</p>
                     </div>

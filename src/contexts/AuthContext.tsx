@@ -49,6 +49,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           email: foundUser.email,
           firstName: foundUser.firstName,
           lastName: foundUser.lastName,
+          accountType: foundUser.accountType,
         };
         setUser(authUser);
         localStorage.setItem('user', JSON.stringify(authUser));
@@ -93,6 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email: newUser.email,
         firstName: newUser.firstName,
         lastName: newUser.lastName,
+        accountType: newUser.accountType,
       };
       setUser(authUser);
       localStorage.setItem('user', JSON.stringify(authUser));

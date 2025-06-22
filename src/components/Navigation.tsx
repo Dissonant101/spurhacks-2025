@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Home, User, Search, LogOut, Bell } from 'lucide-react';
+import { Home, User, Search, LogOut, Bell, Briefcase, Building } from 'lucide-react';
 
 export default function Navigation() {
   const { user, logout } = useAuth();
@@ -51,6 +51,22 @@ export default function Navigation() {
                 <Search className="w-4 h-4 mr-2" />
                 Outreach
               </Link>
+              <Link
+                href="/jobs"
+                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
+              >
+                <Briefcase className="w-4 h-4 mr-2" />
+                Jobs
+              </Link>
+              {(user.accountType === 'company' || user.accountType === 'recruiter') && (
+                <Link
+                  href="/post-job"
+                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
+                >
+                  <Building className="w-4 h-4 mr-2" />
+                  Post Job
+                </Link>
+              )}
             </div>
           </div>
 
@@ -104,6 +120,22 @@ export default function Navigation() {
             <Search className="w-4 h-4 mr-2" />
             Outreach
           </Link>
+          <Link
+            href="/jobs"
+            className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800"
+          >
+            <Briefcase className="w-4 h-4 mr-2" />
+            Jobs
+          </Link>
+          {(user.accountType === 'company' || user.accountType === 'recruiter') && (
+            <Link
+              href="/post-job"
+              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800"
+            >
+              <Building className="w-4 h-4 mr-2" />
+              Post Job
+            </Link>
+          )}
         </div>
       </div>
     </nav>

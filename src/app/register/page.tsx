@@ -4,15 +4,25 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
-import { Eye, EyeOff, Mail, Lock, User } from 'lucide-react';
+import { AccountType } from '@/types';
+import { Eye, EyeOff, Mail, Lock, User, Building, Users } from 'lucide-react';
 
 export default function Register() {
+  const [accountType, setAccountType] = useState<AccountType>('user');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
     confirmPassword: '',
+    // Company fields
+    companyName: '',
+    companySize: '',
+    industry: '',
+    website: '',
+    // Recruiter fields
+    agencyName: '',
+    specializations: [] as string[],
   });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -21,7 +31,7 @@ export default function Register() {
   const { register } = useAuth();
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -42,14 +52,39 @@ export default function Register() {
       return;
     }
 
+    // Validate required fields based on account type
+    if (accountType === 'company' && !formData.companyName) {
+      setError('Company name is required');
+      return;
+    }
+
+    if (accountType === 'recruiter' && !formData.agencyName) {
+      setError('Agency name is required');
+      return;
+    }
+
     setIsLoading(true);
 
-    const success = await register({
+    const registrationData: any = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       password: formData.password,
-    });
+      accountType,
+    };
+
+    // Add type-specific fields
+    if (accountType === 'company') {
+      registrationData.companyName = formData.companyName;
+      registrationData.companySize = formData.companySize;
+      registrationData.industry = formData.industry;
+      registrationData.website = formData.website;
+    } else if (accountType === 'recruiter') {
+      registrationData.agencyName = formData.agencyName;
+      registrationData.specializations = formData.specializations;
+    }
+
+    const success = await register(registrationData);
     
     if (success) {
       router.push('/dashboard');
@@ -172,6 +207,142 @@ export default function Register() {
               />
             </div>
           </div>
+
+          {/* Account Type Selection */}
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-3">
+              Account Type
+            </label>
+            <div className="grid grid-cols-3 gap-3">
+              <button
+                type="button"
+                onClick={() => setAccountType('user')}
+                className={`p-3 rounded-lg border text-center transition-colors ${
+                  accountType === 'user'
+                    ? 'bg-blue-600 border-blue-600 text-white'
+                    : 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                <User className="w-6 h-6 mx-auto mb-1" />
+                <span className="text-xs">Professional</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setAccountType('company')}
+                className={`p-3 rounded-lg border text-center transition-colors ${
+                  accountType === 'company'
+                    ? 'bg-blue-600 border-blue-600 text-white'
+                    : 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                <Building className="w-6 h-6 mx-auto mb-1" />
+                <span className="text-xs">Company</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setAccountType('recruiter')}
+                className={`p-3 rounded-lg border text-center transition-colors ${
+                  accountType === 'recruiter'
+                    ? 'bg-blue-600 border-blue-600 text-white'
+                    : 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600'
+                }`}
+              >
+                <Users className="w-6 h-6 mx-auto mb-1" />
+                <span className="text-xs">Recruiter</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Company-specific fields */}
+          {accountType === 'company' && (
+            <>
+              <div>
+                <label htmlFor="companyName" className="block text-sm font-medium text-gray-300 mb-2">
+                  Company Name *
+                </label>
+                <input
+                  id="companyName"
+                  name="companyName"
+                  type="text"
+                  value={formData.companyName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter company name"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="companySize" className="block text-sm font-medium text-gray-300 mb-2">
+                    Company Size
+                  </label>
+                  <select
+                    id="companySize"
+                    name="companySize"
+                    value={formData.companySize}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="">Select size</option>
+                    <option value="1-10">1-10 employees</option>
+                    <option value="11-50">11-50 employees</option>
+                    <option value="51-200">51-200 employees</option>
+                    <option value="201-1000">201-1000 employees</option>
+                    <option value="1000+">1000+ employees</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="industry" className="block text-sm font-medium text-gray-300 mb-2">
+                    Industry
+                  </label>
+                  <input
+                    id="industry"
+                    name="industry"
+                    type="text"
+                    value={formData.industry}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="e.g., Technology"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="website" className="block text-sm font-medium text-gray-300 mb-2">
+                  Website
+                </label>
+                <input
+                  id="website"
+                  name="website"
+                  type="url"
+                  value={formData.website}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="https://company.com"
+                />
+              </div>
+            </>
+          )}
+
+          {/* Recruiter-specific fields */}
+          {accountType === 'recruiter' && (
+            <>
+              <div>
+                <label htmlFor="agencyName" className="block text-sm font-medium text-gray-300 mb-2">
+                  Agency Name *
+                </label>
+                <input
+                  id="agencyName"
+                  name="agencyName"
+                  type="text"
+                  value={formData.agencyName}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Enter agency name"
+                />
+              </div>
+            </>
+          )}
 
           {error && (
             <div className="p-3 bg-red-900 border border-red-700 rounded-lg text-red-300 text-sm">
