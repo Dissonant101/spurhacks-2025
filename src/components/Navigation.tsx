@@ -1,9 +1,17 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useAuth } from '@/contexts/AuthContext';
-import { useRouter } from 'next/navigation';
-import { Home, User, Search, LogOut, Bell, Briefcase, Building } from 'lucide-react';
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
+import {
+  Home,
+  User,
+  Search,
+  LogOut,
+  Bell,
+  Briefcase,
+  Building,
+} from "lucide-react";
 
 export default function Navigation() {
   const { user, logout } = useAuth();
@@ -11,7 +19,7 @@ export default function Navigation() {
 
   const handleLogout = () => {
     logout();
-    router.push('/login');
+    router.push("/login");
   };
 
   if (!user) return null;
@@ -37,13 +45,16 @@ export default function Navigation() {
                 <Home className="w-4 h-4 mr-2" />
                 Home
               </Link>
-              <Link
-                href="/profile"
-                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
-              >
-                <User className="w-4 h-4 mr-2" />
-                Profile
-              </Link>
+              {(user.accountType === "user" ||
+                user.accountType === "recruiter") && (
+                <Link
+                  href="/profile"
+                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Profile
+                </Link>
+              )}
               <Link
                 href="/outreach"
                 className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
@@ -58,7 +69,8 @@ export default function Navigation() {
                 <Briefcase className="w-4 h-4 mr-2" />
                 Jobs
               </Link>
-              {(user.accountType === 'company' || user.accountType === 'recruiter') && (
+              {(user.accountType === "company" ||
+                user.accountType === "recruiter") && (
                 <Link
                   href="/post-job"
                   className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
@@ -76,7 +88,7 @@ export default function Navigation() {
               <Bell className="w-5 h-5" />
               <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
             </button>
-            
+
             <div className="flex items-center space-x-3">
               <div className="text-sm">
                 <p className="font-medium text-white">
@@ -127,7 +139,8 @@ export default function Navigation() {
             <Briefcase className="w-4 h-4 mr-2" />
             Jobs
           </Link>
-          {(user.accountType === 'company' || user.accountType === 'recruiter') && (
+          {(user.accountType === "company" ||
+            user.accountType === "recruiter") && (
             <Link
               href="/post-job"
               className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800"
