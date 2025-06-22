@@ -316,7 +316,7 @@ export default function JobDetails() {
                   <div className="text-center py-4">
                     <UserCheck className="w-12 h-12 text-green-400 mx-auto mb-2" />
                     <p className="text-green-400 font-semibold">Application Submitted</p>
-                    <p className="text-gray-400 text-sm mt-1">We'll be in touch soon!</p>
+                    <p className="text-gray-400 text-sm mt-1">We&#39;ll be in touch soon!</p>
                   </div>
                 ) : (
                   <>

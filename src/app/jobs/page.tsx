@@ -339,7 +339,9 @@ export default function Jobs() {
                       </Link>
                       <div className="flex items-center text-blue-400 mb-2">
                         <Building className="w-4 h-4 mr-1" />
-                        {job.company}
+                        <Link href={`/company/${job.companyId}`} className="hover:text-blue-300 transition-colors">
+                          {job.company}
+                        </Link>
                         {job.recruiterId && <span className="text-gray-400 ml-2">(via recruiter)</span>}
                       </div>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-400">
