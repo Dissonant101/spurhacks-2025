@@ -55,6 +55,15 @@ export default function Navigation() {
                   Profile
                 </Link>
               )}
+              {user.accountType === "company" && (
+                <Link
+                  href="/company-profile"
+                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Profile
+                </Link>
+              )}
               <Link
                 href="/outreach"
                 className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
