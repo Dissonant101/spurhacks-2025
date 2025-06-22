@@ -74,10 +74,10 @@ export default function Profile() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div>
+          <p className="mt-4 text-gray-300">Loading...</p>
         </div>
       </div>
     );
@@ -165,12 +165,12 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900">
       <Navigation />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Profile Header */}
-        <div className="bg-white rounded-lg shadow mb-6">
+        <div className="bg-gray-800 rounded-lg shadow mb-6 border border-gray-700">
           <div className="p-6">
             <div className="flex items-start justify-between">
               <div className="flex items-center space-x-4">
@@ -185,31 +185,31 @@ export default function Profile() {
                           type="text"
                           value={editForm.firstName}
                           onChange={(e) => setEditForm({...editForm, firstName: e.target.value})}
-                          className="px-3 py-1 border border-gray-300 rounded text-lg font-bold"
+                          className="px-3 py-1 bg-gray-700 border border-gray-600 text-white rounded text-lg font-bold"
                           placeholder="First Name"
                         />
                         <input
                           type="text"
                           value={editForm.lastName}
                           onChange={(e) => setEditForm({...editForm, lastName: e.target.value})}
-                          className="px-3 py-1 border border-gray-300 rounded text-lg font-bold"
+                          className="px-3 py-1 bg-gray-700 border border-gray-600 text-white rounded text-lg font-bold"
                           placeholder="Last Name"
                         />
                       </div>
                       <textarea
                         value={editForm.bio}
                         onChange={(e) => setEditForm({...editForm, bio: e.target.value})}
-                        className="w-full px-3 py-2 border border-gray-300 rounded resize-none"
+                        className="w-full px-3 py-2 bg-gray-700 border border-gray-600 text-white rounded resize-none"
                         rows={3}
                         placeholder="Write a short bio..."
                       />
                     </div>
                   ) : (
                     <>
-                      <h1 className="text-2xl font-bold text-gray-900">
+                      <h1 className="text-2xl font-bold text-white">
                         {profile.firstName} {profile.lastName}
                       </h1>
-                      <p className="text-gray-600 mt-1">{profile.bio || 'No bio added yet'}</p>
+                      <p className="text-gray-300 mt-1">{profile.bio || 'No bio added yet'}</p>
                     </>
                   )}
                 </div>
@@ -226,7 +226,7 @@ export default function Profile() {
                     </button>
                     <button
                       onClick={() => setIsEditing(false)}
-                      className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 flex items-center"
+                      className="px-4 py-2 bg-gray-600 text-gray-300 rounded-lg hover:bg-gray-500 flex items-center"
                     >
                       <X className="w-4 h-4 mr-2" />
                       Cancel
@@ -248,16 +248,16 @@ export default function Profile() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Education */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200">
+          <div className="bg-gray-800 rounded-lg shadow border border-gray-700">
+            <div className="p-6 border-b border-gray-700">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+                <h2 className="text-xl font-semibold text-white flex items-center">
                   <GraduationCap className="w-5 h-5 mr-2" />
                   Education
                 </h2>
                 <button
                   onClick={() => setShowEducationForm(true)}
-                  className="text-blue-600 hover:text-blue-700"
+                  className="text-blue-400 hover:text-blue-300"
                 >
                   <Plus className="w-5 h-5" />
                 </button>
@@ -265,15 +265,15 @@ export default function Profile() {
             </div>
             <div className="p-6">
               {showEducationForm && (
-                <div className="mb-6 p-4 border border-gray-200 rounded-lg">
-                  <h3 className="font-medium mb-3">Add Education</h3>
+                <div className="mb-6 p-4 border border-gray-600 rounded-lg bg-gray-700">
+                  <h3 className="font-medium mb-3 text-white">Add Education</h3>
                   <div className="space-y-3">
                     <input
                       type="text"
                       placeholder="Institution"
                       value={educationForm.institution}
                       onChange={(e) => setEducationForm({...educationForm, institution: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded"
+                      className="w-full px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                     />
                     <div className="grid grid-cols-2 gap-3">
                       <input
@@ -281,14 +281,14 @@ export default function Profile() {
                         placeholder="Degree"
                         value={educationForm.degree}
                         onChange={(e) => setEducationForm({...educationForm, degree: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="text"
                         placeholder="Field of Study"
                         value={educationForm.fieldOfStudy}
                         onChange={(e) => setEducationForm({...educationForm, fieldOfStudy: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
@@ -296,17 +296,17 @@ export default function Profile() {
                         type="date"
                         value={educationForm.startDate}
                         onChange={(e) => setEducationForm({...educationForm, startDate: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="date"
                         value={educationForm.endDate}
                         onChange={(e) => setEducationForm({...educationForm, endDate: e.target.value})}
                         disabled={educationForm.current}
-                        className="px-3 py-2 border border-gray-300 rounded disabled:bg-gray-100"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded disabled:bg-gray-700"
                       />
                     </div>
-                    <label className="flex items-center">
+                    <label className="flex items-center text-gray-300">
                       <input
                         type="checkbox"
                         checked={educationForm.current}
@@ -324,7 +324,7 @@ export default function Profile() {
                       </button>
                       <button
                         onClick={() => setShowEducationForm(false)}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                        className="px-4 py-2 bg-gray-600 text-gray-300 rounded hover:bg-gray-500"
                       >
                         Cancel
                       </button>
@@ -335,36 +335,36 @@ export default function Profile() {
               
               <div className="space-y-4">
                 {profile.education.map((edu) => (
-                  <div key={edu.id} className="border-l-4 border-blue-500 pl-4">
-                    <h3 className="font-medium text-gray-900">{edu.degree} in {edu.fieldOfStudy}</h3>
-                    <p className="text-blue-600">{edu.institution}</p>
-                    <p className="text-sm text-gray-500 flex items-center">
+                  <div key={edu.id} className="border-l-4 border-blue-400 pl-4">
+                    <h3 className="font-medium text-white">{edu.degree} in {edu.fieldOfStudy}</h3>
+                    <p className="text-blue-400">{edu.institution}</p>
+                    <p className="text-sm text-gray-400 flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
                       {edu.startDate.toString().slice(0, 4)} - {edu.current ? 'Present' : edu.endDate?.toString().slice(0, 4)}
                     </p>
                     {edu.description && (
-                      <p className="text-sm text-gray-600 mt-2">{edu.description}</p>
+                      <p className="text-sm text-gray-300 mt-2">{edu.description}</p>
                     )}
                   </div>
                 ))}
                 {profile.education.length === 0 && (
-                  <p className="text-gray-500 text-center py-4">No education added yet</p>
+                  <p className="text-gray-400 text-center py-4">No education added yet</p>
                 )}
               </div>
             </div>
           </div>
 
           {/* Work Experience */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200">
+          <div className="bg-gray-800 rounded-lg shadow border border-gray-700">
+            <div className="p-6 border-b border-gray-700">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+                <h2 className="text-xl font-semibold text-white flex items-center">
                   <Briefcase className="w-5 h-5 mr-2" />
                   Work Experience
                 </h2>
                 <button
                   onClick={() => setShowWorkForm(true)}
-                  className="text-blue-600 hover:text-blue-700"
+                  className="text-blue-400 hover:text-blue-300"
                 >
                   <Plus className="w-5 h-5" />
                 </button>
@@ -372,15 +372,15 @@ export default function Profile() {
             </div>
             <div className="p-6">
               {showWorkForm && (
-                <div className="mb-6 p-4 border border-gray-200 rounded-lg">
-                  <h3 className="font-medium mb-3">Add Work Experience</h3>
+                <div className="mb-6 p-4 border border-gray-600 rounded-lg bg-gray-700">
+                  <h3 className="font-medium mb-3 text-white">Add Work Experience</h3>
                   <div className="space-y-3">
                     <input
                       type="text"
                       placeholder="Company"
                       value={workForm.company}
                       onChange={(e) => setWorkForm({...workForm, company: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded"
+                      className="w-full px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                     />
                     <div className="grid grid-cols-2 gap-3">
                       <input
@@ -388,14 +388,14 @@ export default function Profile() {
                         placeholder="Position"
                         value={workForm.position}
                         onChange={(e) => setWorkForm({...workForm, position: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="text"
                         placeholder="Location"
                         value={workForm.location}
                         onChange={(e) => setWorkForm({...workForm, location: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
@@ -403,17 +403,17 @@ export default function Profile() {
                         type="date"
                         value={workForm.startDate}
                         onChange={(e) => setWorkForm({...workForm, startDate: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="date"
                         value={workForm.endDate}
                         onChange={(e) => setWorkForm({...workForm, endDate: e.target.value})}
                         disabled={workForm.current}
-                        className="px-3 py-2 border border-gray-300 rounded disabled:bg-gray-100"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded disabled:bg-gray-700"
                       />
                     </div>
-                    <label className="flex items-center">
+                    <label className="flex items-center text-gray-300">
                       <input
                         type="checkbox"
                         checked={workForm.current}
@@ -426,7 +426,7 @@ export default function Profile() {
                       placeholder="Description"
                       value={workForm.description}
                       onChange={(e) => setWorkForm({...workForm, description: e.target.value})}
-                      className="w-full px-3 py-2 border border-gray-300 rounded resize-none"
+                      className="w-full px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded resize-none"
                       rows={3}
                     />
                     <div className="flex space-x-2">
@@ -438,7 +438,7 @@ export default function Profile() {
                       </button>
                       <button
                         onClick={() => setShowWorkForm(false)}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                        className="px-4 py-2 bg-gray-600 text-gray-300 rounded hover:bg-gray-500"
                       >
                         Cancel
                       </button>
@@ -449,10 +449,10 @@ export default function Profile() {
               
               <div className="space-y-4">
                 {profile.workExperience.map((work) => (
-                  <div key={work.id} className="border-l-4 border-green-500 pl-4">
-                    <h3 className="font-medium text-gray-900">{work.position}</h3>
-                    <p className="text-green-600">{work.company}</p>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
+                  <div key={work.id} className="border-l-4 border-green-400 pl-4">
+                    <h3 className="font-medium text-white">{work.position}</h3>
+                    <p className="text-green-400">{work.company}</p>
+                    <div className="flex items-center space-x-4 text-sm text-gray-400">
                       <span className="flex items-center">
                         <Calendar className="w-4 h-4 mr-1" />
                         {work.startDate.toString().slice(0, 4)} - {work.current ? 'Present' : work.endDate?.toString().slice(0, 4)}
@@ -465,12 +465,12 @@ export default function Profile() {
                       )}
                     </div>
                     {work.description && (
-                      <p className="text-sm text-gray-600 mt-2">{work.description}</p>
+                      <p className="text-sm text-gray-300 mt-2">{work.description}</p>
                     )}
                   </div>
                 ))}
                 {profile.workExperience.length === 0 && (
-                  <p className="text-gray-500 text-center py-4">No work experience added yet</p>
+                  <p className="text-gray-400 text-center py-4">No work experience added yet</p>
                 )}
               </div>
             </div>
@@ -478,16 +478,16 @@ export default function Profile() {
         </div>
 
         {/* Skills */}
-        <div className="bg-white rounded-lg shadow mt-6">
-          <div className="p-6 border-b border-gray-200">
+        <div className="bg-gray-800 rounded-lg shadow mt-6 border border-gray-700">
+          <div className="p-6 border-b border-gray-700">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
+              <h2 className="text-xl font-semibold text-white flex items-center">
                 <Award className="w-5 h-5 mr-2" />
                 Skills
               </h2>
               <button
                 onClick={() => setShowSkillsForm(true)}
-                className="text-blue-600 hover:text-blue-700"
+                className="text-blue-400 hover:text-blue-300"
               >
                 <Plus className="w-5 h-5" />
               </button>
@@ -495,15 +495,15 @@ export default function Profile() {
           </div>
           <div className="p-6">
             {showSkillsForm && (
-              <div className="mb-6 p-4 border border-gray-200 rounded-lg">
-                <h3 className="font-medium mb-3">Add Skill</h3>
+              <div className="mb-6 p-4 border border-gray-600 rounded-lg bg-gray-700">
+                <h3 className="font-medium mb-3 text-white">Add Skill</h3>
                 <div className="flex space-x-2">
                   <input
                     type="text"
                     placeholder="Enter a skill"
                     value={newSkill}
                     onChange={(e) => setNewSkill(e.target.value)}
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded"
+                    className="flex-1 px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                     onKeyPress={(e) => e.key === 'Enter' && addSkill()}
                   />
                   <button
@@ -514,7 +514,7 @@ export default function Profile() {
                   </button>
                   <button
                     onClick={() => setShowSkillsForm(false)}
-                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+                    className="px-4 py-2 bg-gray-600 text-gray-300 rounded hover:bg-gray-500"
                   >
                     Cancel
                   </button>
@@ -526,7 +526,7 @@ export default function Profile() {
               {profile.skills.map((skill, index) => (
                 <span
                   key={index}
-                  className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm group hover:bg-blue-200 cursor-pointer"
+                  className="inline-flex items-center px-3 py-1 bg-blue-900 text-blue-200 rounded-full text-sm group hover:bg-blue-800 cursor-pointer"
                   onClick={() => removeSkill(skill)}
                   title="Click to remove"
                 >
@@ -535,7 +535,7 @@ export default function Profile() {
                 </span>
               ))}
               {profile.skills.length === 0 && (
-                <p className="text-gray-500 text-center py-4 w-full">No skills added yet</p>
+                <p className="text-gray-400 text-center py-4 w-full">No skills added yet</p>
               )}
             </div>
           </div>

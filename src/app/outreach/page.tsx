@@ -111,10 +111,10 @@ export default function Outreach() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div>
+          <p className="mt-4 text-gray-300">Loading...</p>
         </div>
       </div>
     );
@@ -174,14 +174,14 @@ export default function Outreach() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900">
       <Navigation />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Network Outreach</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-white">Network Outreach</h1>
+          <p className="mt-2 text-gray-300">
             Find and connect with professionals through your network
           </p>
         </div>
@@ -190,8 +190,8 @@ export default function Outreach() {
           {/* Search Section */}
           <div className="space-y-6">
             {/* Search Bar */}
-            <div className="bg-white rounded-lg shadow p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Search People</h2>
+            <div className="bg-gray-800 rounded-lg shadow p-6 border border-gray-700">
+              <h2 className="text-xl font-semibold text-white mb-4">Search People</h2>
               <div className="space-y-4">
                 <div className="flex space-x-2">
                   <div className="flex-1 relative">
@@ -201,13 +201,13 @@ export default function Outreach() {
                       placeholder="Search by name, company, or position..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     />
                   </div>
                   <button
                     onClick={() => setShowFilters(!showFilters)}
-                    className="px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 flex items-center"
+                    className="px-4 py-3 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600 flex items-center"
                   >
                     <Filter className="w-5 h-5 mr-2" />
                     Filters
@@ -227,21 +227,21 @@ export default function Outreach() {
 
                 {/* Filters */}
                 {showFilters && (
-                  <div className="p-4 bg-gray-50 rounded-lg space-y-3">
+                  <div className="p-4 bg-gray-700 rounded-lg space-y-3">
                     <div className="grid grid-cols-2 gap-3">
                       <input
                         type="text"
                         placeholder="Company"
                         value={filters.company}
                         onChange={(e) => setFilters({...filters, company: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="text"
                         placeholder="Position"
                         value={filters.position}
                         onChange={(e) => setFilters({...filters, position: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                     </div>
                     <div className="grid grid-cols-2 gap-3">
@@ -250,14 +250,14 @@ export default function Outreach() {
                         placeholder="Industry"
                         value={filters.industry}
                         onChange={(e) => setFilters({...filters, industry: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                       <input
                         type="text"
                         placeholder="Location"
                         value={filters.location}
                         onChange={(e) => setFilters({...filters, location: e.target.value})}
-                        className="px-3 py-2 border border-gray-300 rounded"
+                        className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded"
                       />
                     </div>
                   </div>
@@ -266,15 +266,15 @@ export default function Outreach() {
             </div>
 
             {/* Search Results */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">Search Results</h3>
+            <div className="bg-gray-800 rounded-lg shadow border border-gray-700">
+              <div className="p-6 border-b border-gray-700">
+                <h3 className="text-lg font-semibold text-white">Search Results</h3>
               </div>
               <div className="p-6">
                 {searchResults.length > 0 ? (
                   <div className="space-y-4">
                     {searchResults.map((result) => (
-                      <div key={result.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                      <div key={result.id} className="border border-gray-600 bg-gray-700 rounded-lg p-4 hover:bg-gray-650 transition-colors">
                         <div className="flex items-start space-x-4">
                           <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
                             {result.avatar}
@@ -282,24 +282,24 @@ export default function Outreach() {
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between">
                               <div>
-                                <h4 className="text-lg font-medium text-gray-900">{result.name}</h4>
-                                <p className="text-blue-600">{result.position}</p>
-                                <p className="text-gray-600 flex items-center">
+                                <h4 className="text-lg font-medium text-white">{result.name}</h4>
+                                <p className="text-blue-400">{result.position}</p>
+                                <p className="text-gray-300 flex items-center">
                                   <Building className="w-4 h-4 mr-1" />
                                   {result.company}
                                 </p>
                                 {result.location && (
-                                  <p className="text-gray-500 flex items-center">
+                                  <p className="text-gray-400 flex items-center">
                                     <MapPin className="w-4 h-4 mr-1" />
                                     {result.location}
                                   </p>
                                 )}
                               </div>
                               <div className="text-right">
-                                <span className="inline-flex items-center px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                                <span className="inline-flex items-center px-2 py-1 bg-blue-900 text-blue-200 text-xs rounded-full">
                                   {getDegreeText(result.degreeOfConnection)}
                                 </span>
-                                <p className="text-xs text-gray-500 mt-1 flex items-center">
+                                <p className="text-xs text-gray-400 mt-1 flex items-center">
                                   <Users className="w-3 h-3 mr-1" />
                                   {result.mutualConnections} mutual
                                 </p>
@@ -307,18 +307,18 @@ export default function Outreach() {
                             </div>
                             
                             {result.bio && (
-                              <p className="text-sm text-gray-600 mt-2">{result.bio}</p>
+                              <p className="text-sm text-gray-300 mt-2">{result.bio}</p>
                             )}
                             
                             <div className="flex flex-wrap gap-1 mt-2">
                               {result.skills.slice(0, 3).map((skill, index) => (
-                                <span key={index} className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded">
+                                <span key={index} className="inline-flex items-center px-2 py-1 bg-gray-600 text-gray-200 text-xs rounded">
                                   <Award className="w-3 h-3 mr-1" />
                                   {skill}
                                 </span>
                               ))}
                               {result.skills.length > 3 && (
-                                <span className="text-xs text-gray-500">+{result.skills.length - 3} more</span>
+                                <span className="text-xs text-gray-400">+{result.skills.length - 3} more</span>
                               )}
                             </div>
                             
@@ -326,7 +326,7 @@ export default function Outreach() {
                               <button className="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
                                 Connect
                               </button>
-                              <button className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded hover:bg-gray-200 flex items-center">
+                              <button className="px-3 py-1 bg-gray-600 text-gray-300 text-sm rounded hover:bg-gray-500 flex items-center">
                                 <MessageCircle className="w-3 h-3 mr-1" />
                                 Message
                               </button>
@@ -338,8 +338,8 @@ export default function Outreach() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Search for professionals to expand your network</p>
+                    <Search className="w-12 h-12 text-gray-500 mx-auto mb-4" />
+                    <p className="text-gray-400">Search for professionals to expand your network</p>
                   </div>
                 )}
               </div>
@@ -347,13 +347,13 @@ export default function Outreach() {
           </div>
 
           {/* AI Assistant */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200">
-              <h2 className="text-xl font-semibold text-gray-900 flex items-center">
-                <Bot className="w-6 h-6 mr-2 text-blue-600" />
+          <div className="bg-gray-800 rounded-lg shadow border border-gray-700">
+            <div className="p-6 border-b border-gray-700">
+              <h2 className="text-xl font-semibold text-white flex items-center">
+                <Bot className="w-6 h-6 mr-2 text-blue-400" />
                 AI Networking Assistant
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-gray-300 mt-1">
                 Ask me to help find specific people or connections in your network
               </p>
             </div>
@@ -367,7 +367,7 @@ export default function Outreach() {
                     placeholder="e.g., 'Find me a hiring manager at a tech company' or 'Who can introduce me to someone at Google?'"
                     value={aiQuery}
                     onChange={(e) => setAiQuery(e.target.value)}
-                    className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="flex-1 px-4 py-3 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     onKeyPress={(e) => e.key === 'Enter' && handleAiQuery()}
                   />
                   <button
@@ -385,7 +385,7 @@ export default function Outreach() {
 
                 {/* AI Response */}
                 {(aiResponse || isAiThinking) && (
-                  <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+                  <div className="mt-6 p-4 bg-gray-700 rounded-lg">
                     <div className="flex items-start space-x-3">
                       <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm">
                         <Bot className="w-4 h-4" />
@@ -394,14 +394,14 @@ export default function Outreach() {
                         {isAiThinking ? (
                           <div className="flex items-center space-x-2">
                             <div className="animate-pulse flex space-x-1">
-                              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                              <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
+                              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                             </div>
-                            <span className="text-blue-600 text-sm">AI is analyzing your network...</span>
+                            <span className="text-blue-400 text-sm">AI is analyzing your network...</span>
                           </div>
                         ) : (
-                          <div className="prose prose-sm max-w-none text-gray-700">
+                          <div className="prose prose-sm max-w-none text-gray-300">
                             {aiResponse.split('\n').map((line, index) => (
                               <p key={index} className="mb-2 whitespace-pre-wrap">{line}</p>
                             ))}
@@ -414,29 +414,29 @@ export default function Outreach() {
 
                 {/* Quick Actions */}
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-900 mb-3">Quick Actions</h3>
+                  <h3 className="text-sm font-medium text-white mb-3">Quick Actions</h3>
                   <div className="grid grid-cols-1 gap-2">
                     <button
                       onClick={() => setAiQuery("Find me hiring managers at tech companies")}
-                      className="text-left px-3 py-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-700"
+                      className="text-left px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-300"
                     >
                       Find hiring managers at tech companies
                     </button>
                     <button
                       onClick={() => setAiQuery("Who can introduce me to someone at a startup?")}
-                      className="text-left px-3 py-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-700"
+                      className="text-left px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-300"
                     >
                       Find startup connections
                     </button>
                     <button
                       onClick={() => setAiQuery("Look for VCs or investors in my network")}
-                      className="text-left px-3 py-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-700"
+                      className="text-left px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-300"
                     >
                       Find VCs or investors
                     </button>
                     <button
                       onClick={() => setAiQuery("Find software engineers who could mentor me")}
-                      className="text-left px-3 py-2 text-sm bg-gray-50 hover:bg-gray-100 rounded-lg text-gray-700"
+                      className="text-left px-3 py-2 text-sm bg-gray-700 hover:bg-gray-600 rounded-lg text-gray-300"
                     >
                       Find potential mentors
                     </button>

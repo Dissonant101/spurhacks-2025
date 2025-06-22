@@ -18,28 +18,28 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto"></div>
+          <p className="mt-4 text-gray-300">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="py-6">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-blue-600">
+            <div className="text-2xl font-bold text-blue-400">
               SpurHacks Network
             </div>
             <div className="space-x-4">
               <Link
                 href="/login"
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-gray-300 hover:text-white transition-colors"
               >
                 Sign In
               </Link>
@@ -55,10 +55,10 @@ export default function Home() {
 
         {/* Hero Section */}
         <div className="pt-20 pb-16 text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl font-bold text-white mb-6">
             Build Your Professional Network
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
             Connect with professionals, discover opportunities, and grow your career 
             with our AI-powered networking platform.
           </p>
@@ -72,7 +72,7 @@ export default function Home() {
             </Link>
             <Link
               href="/login"
-              className="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-medium border border-blue-600 hover:bg-blue-50 transition-colors"
+              className="inline-flex items-center bg-gray-800 text-blue-400 px-8 py-4 rounded-lg text-lg font-medium border border-blue-400 hover:bg-gray-700 transition-colors"
             >
               Sign In
             </Link>
@@ -82,47 +82,47 @@ export default function Home() {
         {/* Features */}
         <div className="py-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Everything You Need to Network Effectively
             </h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-gray-300">
               Our platform provides powerful tools to help you build meaningful professional connections.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-xl shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <User className="w-8 h-8 text-blue-600" />
+            <div className="bg-gray-800 rounded-xl shadow-md p-8 text-center border border-gray-700">
+              <div className="w-16 h-16 bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <User className="w-8 h-8 text-blue-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Professional Profiles
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Create comprehensive profiles with your education, work experience, and skills to showcase your professional journey.
               </p>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-green-600" />
+            <div className="bg-gray-800 rounded-xl shadow-md p-8 text-center border border-gray-700">
+              <div className="w-16 h-16 bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-green-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Smart Connections
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Discover and connect with professionals through multiple degrees of separation in your network.
               </p>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md p-8 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-purple-600" />
+            <div className="bg-gray-800 rounded-xl shadow-md p-8 text-center border border-gray-700">
+              <div className="w-16 h-16 bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Search className="w-8 h-8 text-purple-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 AI-Powered Outreach
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Use our AI assistant to find specific professionals like hiring managers, VCs, or potential mentors in your network.
               </p>
             </div>
@@ -131,11 +131,11 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="py-16 text-center">
-          <div className="bg-white rounded-2xl shadow-xl p-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="bg-gray-800 rounded-2xl shadow-xl p-12 border border-gray-700">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Ready to Expand Your Network?
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-gray-300 mb-8">
               Join thousands of professionals who are already building meaningful connections.
             </p>
             <Link
