@@ -11,6 +11,7 @@ import {
   Bell,
   Briefcase,
   Building,
+  MessageCircle,
 } from "lucide-react";
 
 export default function Navigation() {
@@ -71,6 +72,16 @@ export default function Navigation() {
                 <Search className="w-4 h-4 mr-2" />
                 Outreach
               </Link>
+              {(user.accountType === "user" ||
+                user.accountType === "recruiter") && (
+                <Link
+                  href="/chat"
+                  className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Chat
+                </Link>
+              )}
               <Link
                 href="/jobs"
                 className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800 transition-colors"
@@ -141,6 +152,16 @@ export default function Navigation() {
             <Search className="w-4 h-4 mr-2" />
             Outreach
           </Link>
+          {(user.accountType === "user" ||
+            user.accountType === "recruiter") && (
+            <Link
+              href="/chat"
+              className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800"
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Chat
+            </Link>
+          )}
           <Link
             href="/jobs"
             className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-gray-800"
